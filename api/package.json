@@ -1,0 +1,34 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "logs",
+      "node_modules"
+    ]
+  },
+  "dependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/plugin-transform-async-to-generator": "^7.8.3",
+    "@babel/register": "^7.8.6",
+    "@koa/cors": "2",
+    "axios": "^0.19.2",
+    "dayjs": "^1.8.26",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "3",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^8.0.8",
+    "koa-session": "^6.0.0",
+    "log4js": "^6.1.2",
+    "mysql": "^2.18.1",
+    "node-emoji": "^1.10.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
