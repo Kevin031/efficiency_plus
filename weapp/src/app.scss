@@ -1,0 +1,12 @@
+@import './styles/color.scss';
+@import './styles/iconfont.scss';
+
+page {
+  height: 100%;
+  background-color: $color-bg;
+  box-sizing: border-box;
+}
+
+view {
+  box-sizing: border-box;
+}

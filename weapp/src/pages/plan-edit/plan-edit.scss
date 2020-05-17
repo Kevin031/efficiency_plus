@@ -1,0 +1,44 @@
+@import '../../styles/color.scss';
+
+.page-wrapper {
+  background-color: #fff;
+  height: 100%;
+  padding: 50px;
+
+  .form-control {
+    margin-bottom: 30px;
+    .block {
+      background-color: #f2f2f2;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      border-radius: 20px;
+      border: solid 1px #f2f2f2;
+      &.error {
+        border: solid 1px red;
+      }
+      input, text {
+        flex: 1;
+        font-size: 28px;
+      }
+      text:not(.value) {
+        color: #999;
+      }
+    }
+    &.align-center {
+      text-align: center;
+    }
+  }
+
+  .submit {
+    background-color: $color-blue;
+    padding: 20px 80px;
+    display: inline-block;
+    color: #fff;
+    font-size: 28px;
+    border-radius: 40px;
+    &:active {
+      opacity: .9;
+    }
+  }
+}

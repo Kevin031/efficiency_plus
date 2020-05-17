@@ -1,0 +1,17 @@
+@import '../../styles/color';
+
+.page-wrapper {
+  height: 100%;
+}
+
+.task-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 17px 17px 0;
+}
+
+.task-item {
+  width: 50%;
+  padding: 12px;
+  box-sizing: border-box;
+}

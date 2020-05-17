@@ -1,0 +1,79 @@
+@import '../../styles/color';
+
+.plan-card {
+  background-color: #fff;
+  height: 200px;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+
+  .progress {
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(255,255,255, .5);
+  }
+
+  .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 3;
+  }
+
+  &.status-2 {
+    opacity: .5;
+  }
+
+  &.color-yellow {
+    background-color: $color-yellow;
+  }
+  &.color-green {
+    background-color: $color-green;
+  }
+  &.color-orange {
+    background-color: $color-orange;
+  }
+  &.color-red {
+    background-color: $color-red;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .settings {
+    background: rgba(255,255,255,.1);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .time {
+    font-size: 40px;
+    color: #fff;
+  }
+
+  .title {
+    color: #fff;
+    font-size: 22px;
+  }
+
+  &.create {
+    .settings {
+      background-color: $color-blue;
+    }
+    .title {
+      color: $color-blue;
+    }
+  }
+}

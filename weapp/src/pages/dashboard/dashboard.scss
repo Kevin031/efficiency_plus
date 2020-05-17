@@ -1,0 +1,44 @@
+@import '../../styles/color';
+
+.dashboard {
+  .header {
+    // background-color: #fff;
+    padding: 30px;
+  }
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin-bottom: 4px;
+    }
+    .name {
+      font-size: 32px;
+    }
+  }
+
+  .stat {
+    background-color: #fff;
+    padding-left: 30px;
+
+    .stat-item {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 28px;
+      padding-right: 30px;
+
+      .value {
+        color: $color-secondary;
+      }
+    }
+    .split {
+      width: 100%;
+      height: 1px;
+      background-color: $color-bg;
+    }
+  }
+}
