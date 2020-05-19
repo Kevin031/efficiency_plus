@@ -33,6 +33,7 @@ export const PlanModel = types.model('Plan')
   })
   .views(self => ({
     get formattedSpent () {
+      if (isNaN(self.spent)) return '00:00'
       return day(self.spent).format('mm:ss')
     }
   }))
@@ -66,6 +67,7 @@ export const PlanModel = types.model('Plan')
     finish () {
       clearInterval(timer)
       timer = null
+      self.end_time = new Date().getTime()
       self.status = STATUS_CODE.FINISHED
     }
   }))
@@ -87,10 +89,8 @@ export const PlanStore = types.model('PlanStore')
      */
     initPatchListener () {
       onPatch(self, patch => {
-        console.log(patch)
         if (/^\/plans/.test(patch.path)) {
           if (!/\/spent$/.test(patch.path)) {
-            console.log('local save')
             self.uploadLocalStorage()
           }
           if (patch.op !== 'remove') {

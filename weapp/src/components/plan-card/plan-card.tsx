@@ -121,7 +121,7 @@ export default class PlanCard extends Taro.Component {
             { getStatus() }
           </Text>
           <View className='settings' onTap={this.showMenu}>
-              <View className='icon icon-ellipsis-light' />
+            <View className='icon icon-ellipsis-light' />
           </View>
         </View>
         <Text className='title'>{model.title}</Text>
