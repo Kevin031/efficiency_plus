@@ -15,7 +15,7 @@ const logger = new Logger(str => {
   console.log(day().format('YYYY-MM-DD HH:mm:ss') + str)
 })
 
-const PORT = 20228
+const PORT = 20229
 
 app.use(cors({ origin: '*' }))
 app.use(logger)
