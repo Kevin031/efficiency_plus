@@ -67,8 +67,10 @@ export default class PlanCard extends Taro.Component {
     Taro.showModal({
       title: '确认删除计划？',
       content: '此操作不可恢复',
-      success: () => {
-        this.planStore.deletePlan(this.props.model.id)
+      success: (res) => {
+        if (res.confirm) {
+          this.planStore.deletePlan(this.props.model.id)
+        }
       }
     })
   }

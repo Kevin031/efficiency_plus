@@ -87,14 +87,18 @@ export const PlanStore = types.model('PlanStore')
      */
     initPatchListener () {
       onPatch(self, patch => {
+        console.log(patch)
         if (/^\/plans/.test(patch.path)) {
-          if (/\/spent$/.test(patch.path)) {
-            return
+          if (!/\/spent$/.test(patch.path)) {
+            console.log('local save')
+            self.uploadLocalStorage()
           }
-          debounce(self.uploadData, 2000)
+          if (patch.op !== 'remove') {
+            debounce(self.uploadData, 2000)
+          }
         }
       })
-    }
+    },
     /**
      * 创建计划
      * @param data { title, remark, spend }
@@ -120,9 +124,14 @@ export const PlanStore = types.model('PlanStore')
      * 删除计划
      * @param id 计划id
      */
-    deletePlan (id) {
+    deletePlan: flow(function * (id) {
       self.plans = self.plans.filter(plan => plan.id !== id)
-    },
+      const data = yield Api.deletePlan(id)
+      if (!data.errCode) {
+        self.uploadLocalStorage()
+        Taro.showToast({ title: '已删除', icon: 'success' })
+      }
+    }),
     /**
      * 获取计划
      * @param id 计划id
@@ -141,19 +150,22 @@ export const PlanStore = types.model('PlanStore')
       self.getPlan(id).start()
     },
     /**
-     * 上传数据 localStorage/Server
+     * 更新本地数据
      */
-    uploadData: flow(function * () {
+    uploadLocalStorage: flow(function * () {
       const data = {
         plans: toJS(self.plans).map(item => ({ ...item, date: self.date })),
         last_updated: Date.now()
       }
-      Taro.setStorage({
-        key: self.date,
-        data
-      })
-      // 同步至服务器
+      Taro.setStorageSync(self.date, data)
+      return true
+    }),
+    /**
+     * 上传数据 Server
+     */
+    uploadData: flow(function * () {
       Taro.showNavigationBarLoading()
+      const data = Taro.getStorageSync(self.date)
       yield Api.update(data.plans)
       Taro.hideNavigationBarLoading()
     }),

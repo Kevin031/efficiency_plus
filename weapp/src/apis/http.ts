@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 
-const baseURL = 'http://localhost:20228'
+const baseURL = 'https://api.efficiency.kevinlau.cn'
 
 export default {
   baseURL,
@@ -27,6 +27,17 @@ export default {
           'content': 'application/json'
         },
         data, 
+        success: res => {
+          resolve(res.data)
+        }
+      })
+    })
+  },
+  delete (url) {
+    return new Promise((resolve, reject) => {
+      return Taro.request({
+        url: baseURL + url,
+        method: 'DELETE',
         success: res => {
           resolve(res.data)
         }

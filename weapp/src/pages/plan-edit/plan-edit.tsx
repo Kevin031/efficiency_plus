@@ -9,7 +9,7 @@ import './plan-edit.scss'
 interface PlanEdit {
   state: {
     title: string
-    plannedTime: number
+    planned_time: number
     remark: string
   }
 }
@@ -22,7 +22,7 @@ export default class PlanEdit extends Taro.Component {
 
   state = {
     title: '',
-    plannedTime: 0,
+    planned_time: 0,
     remark: '',
     errors: []
   }
@@ -38,7 +38,7 @@ export default class PlanEdit extends Taro.Component {
 
   changePlannedTime (e) {
     this.setState({
-      plannedTime: (parseInt(e.detail.value) + 1) * 60 * 1000,
+      planned_time: (parseInt(e.detail.value) + 1) * 60 * 1000,
       errors: this.state.errors.filter(code => code !== 1)
     })
   }
@@ -57,16 +57,16 @@ export default class PlanEdit extends Taro.Component {
   }
 
   submit () {
-    const { title, plannedTime, remark } = this.state
+    const { title, planned_time, remark } = this.state
 
-    if (this.validate(title, 0) && this.validate(plannedTime, 1)) {
-      this.planStore.addPlan({ title, plannedTime, remark })
+    if (this.validate(title, 0) && this.validate(planned_time, 1)) {
+      this.planStore.addPlan({ title, planned_time, remark })
       Taro.navigateBack({ delta: 1 })
     }
   }
 
-  get timeplannedTime () {
-    return this.state.plannedTime / 1000 / 60 + '分钟'
+  get formattedPlannedTime () {
+    return this.state.planned_time / 1000 / 60 + '分钟'
   }
 
   render () {
@@ -90,8 +90,8 @@ export default class PlanEdit extends Taro.Component {
         >
           <View className={cx('block', { 'error': this.state.errors.includes(1) })}>
             {
-              this.state.plannedTime
-                ? <Text className='value'>{this.timeplannedTime}</Text>
+              this.state.planned_time
+                ? <Text className='value'>{this.formattedPlannedTime}</Text>
                 : <Text>将花费...</Text>
             }
           </View>

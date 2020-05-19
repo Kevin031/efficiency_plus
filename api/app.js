@@ -44,6 +44,19 @@ app.use(async (ctx, next) => {
   }
 })
 
+app.use(async (ctx, next) => {
+  await next()
+  if (!ctx.body) {
+    ctx.status = 404
+    ctx.body = {
+      errCode: 1,
+      data: {
+        msg: 'route not found'
+      }
+    }
+  }
+})
+
 // 挂载路由
 const route_modules = fs.readdirSync(path.join(__dirname, './routes'))
 route_modules.forEach(name => {

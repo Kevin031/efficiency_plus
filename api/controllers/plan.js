@@ -41,7 +41,6 @@ class PlanController {
 
     let database = new Database()
     try {
-      console.log(`SELECT * FROM plans WHERE uid='${uid}' AND date='${date}'`)
       let records = await database.query(`SELECT * FROM plans WHERE uid='${uid}' AND date='${date}'`)
       ctx.body = {
         errCode: 0,
@@ -50,6 +49,23 @@ class PlanController {
           last_updated: records.length ? Math.min(...records.map(item => item.update_time)) : 0
         }
       }
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  static async delete (ctx) {
+    let uid = ctx.session.uid
+    if (!uid) throw new Error('user is not login')
+
+    let database = new Database()
+    try {
+      await database.query(`DELETE FROM plans WHERE id='${ctx.params.id}'`)
+      ctx.body = {
+        errCode: 0,
+        data: {}
+      }
+      return true
     } catch (err) {
       throw new Error(err)
     }
